@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useProSidebar , Sidebar, Menu, MenuItem, sidebarClasses } from 'react-pro-sidebar'
-import { Box, IconButton, Typography, useTheme } from '@mui/material'
+import { Box, Typography, useTheme } from '@mui/material'
 import { Link } from 'react-router-dom'
 import { colorCodes } from '../../theme'
 import GridViewOutlinedIcon from '@mui/icons-material/GridViewOutlined';
@@ -8,11 +8,35 @@ import EngineeringOutlinedIcon from '@mui/icons-material/EngineeringOutlined';
 import WarehouseOutlinedIcon from '@mui/icons-material/WarehouseOutlined';
 import Inventory2OutlinedIcon from '@mui/icons-material/Inventory2Outlined';
 import PersonAddAlt1OutlinedIcon from '@mui/icons-material/PersonAddAlt1Outlined';
-import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
-import { display } from '@mui/system'
 import Logo from '../../assets/Block-logo.png'
 import LogoWhite from '../../assets/Block-logo-white.png'
 import MaleAvatar from '../../assets/Male_Avatar.webp'
+import LogoOnly from '../../assets/block-logo-only.png'
+import 'react-pro-sidebar/dist/css/styles.css'
+
+const Item = ({ title, to, icon, selected, setSelected }) => {
+
+  const theme = useTheme()
+  const colors = colorCodes(theme.palette.mode)
+
+  return(
+    <MenuItem
+      active = { selected == title }
+      style = {{ color: colors.grey[100] }}
+      onClick = {() => setSelected(title)}
+      icon = {icon}
+    >
+
+      <Typography>
+        {title}
+      </Typography>
+
+      <Link to={to} />
+
+    </MenuItem>
+  )
+
+}
 
 const Appbar = () => {
 
@@ -25,15 +49,31 @@ const Appbar = () => {
     <Box
       sx={{
         height: "100%",
-        display: 'flex'
+        display: 'flex',
+
+        '& .ps-menu-button:hover': {
+          color: `${colors.orangeVibrant[500]} !important`,
+          backgroundColor: `${colors.primary[400]} !important`
+        },
+
+        '& .ps-menuitem-root.ps-active .ps-menu-button': {
+          backgroundColor: `${colors.primary[400]} !important`,
+          color: `${colors.orangeVibrant[500]} !important`,
+        }
       }}
     >
 
     <Sidebar
+
       rootStyles={{
         [`.${sidebarClasses.container}`]: {
           backgroundColor: `${colors.primary[400]}`,
         },
+
+        [`.${sidebarClasses.root}`]: {
+          borderRight: `1px solid red`
+        },
+
       }}
 
       transitionDuration={500}
@@ -41,7 +81,7 @@ const Appbar = () => {
       <Menu>
         <MenuItem
               onClick={() => collapseSidebar()}
-              icon={collapsed ? <MenuOutlinedIcon /> : undefined}
+              icon={collapsed ? <img src={LogoOnly} alt='Logo-only' /> : undefined}
               style={{
                 margin: "40px 0 20px 0",
                 color: colors.grey[100],
@@ -64,10 +104,6 @@ const Appbar = () => {
                   <img src={Logo} alt="logo" />
                 )}
                 
-
-                <IconButton onClick={() => collapseSidebar()}>
-                  <MenuOutlinedIcon />
-                </IconButton>
               </Box>
             )}
 
@@ -96,46 +132,78 @@ const Appbar = () => {
               />
             </Box>
 
-            <Box>
-              <Typography>Name</Typography>
-              <Typography>Role</Typography>
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                marginTop: '10px'
+              }}
+            >
+              <Typography 
+                variant='h3' 
+                sx={{
+                  fontWeight: 'bold'
+                }} 
+              >
+                Anas
+              </Typography>
+              <Typography
+                variant='h6'
+                sx={{
+                  color: colors.greenVibrant[500],
+                  fontWeight: 600
+                }}
+              >
+                Admin
+              </Typography>
             </Box>
           </Box>
         )}
-        
 
-        <MenuItem
-              icon={collapsed ? <GridViewOutlinedIcon /> : undefined}
-              style={{
-                margin: "10px 0 20px 0",
-                color: colors.grey[100],
-              }}
-            >
-              
-              {!collapsed && (
-              <Box
-                sx={{
-                  display: 'flex',
-                  justifyContent: 'space-around',
-                  alignItems: 'center',
-                  marginLeft: '15px'
-                }}
-              >
-                
+        <Box>
 
-                <IconButton>
-                  <GridViewOutlinedIcon />
-                </IconButton>
-                
-                <Typography variant='h4' color={colors.grey[100]} >
-                  Dashboard
-                </Typography>
+          <Item 
+            title='Dashboard'
+            to='/'
+            icon = {<GridViewOutlinedIcon />}
+            selected={selected}
+            setSelected={setSelected}
+          />
 
-              </Box>
-            )}
+          <Item 
+            title='Employees'
+            to='/employees'
+            icon = {<EngineeringOutlinedIcon />}
+            selected={selected}
+            setSelected={setSelected}
+          />
 
-        </MenuItem>
+          <Item 
+            title='Warehouses'
+            to='/warhouses'
+            icon = {<WarehouseOutlinedIcon />}
+            selected={selected}
+            setSelected={setSelected}
+          />
 
+          <Item 
+            title='Products'
+            to='/products'
+            icon = {<Inventory2OutlinedIcon />}
+            selected={selected}
+            setSelected={setSelected}
+          />
+
+          <Item 
+            title='Add Employee'
+            to='/add_employee'
+            icon = {<PersonAddAlt1OutlinedIcon />}
+            selected={selected}
+            setSelected={setSelected}
+          />
+        </Box>
+      
       </Menu>
     </Sidebar>
 

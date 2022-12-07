@@ -14,10 +14,11 @@
     "@mui/icons-material": "^5.10.16",
     "@mui/material": "^5.10.16",
     "@mui/x-data-grid": "^5.17.14",
+    "axios": "^1.2.1",
     "formik": "^2.2.9",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-pro-sidebar": "^1.0.0-alpha.9",
+    "react-pro-sidebar": "0.7.1",
     "react-router-dom": "^6.4.4",
     "yup": "^0.32.11"
   },
