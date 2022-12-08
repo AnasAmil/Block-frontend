@@ -177,7 +177,7 @@ const Appbar = () => {
 
           <Item 
             title='Warehouses'
-            to='/warhouses'
+            to='/warehouses'
             icon = {<WarehouseOutlinedIcon />}
             selected={selected}
             setSelected={setSelected}

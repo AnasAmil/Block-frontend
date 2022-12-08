@@ -10,7 +10,6 @@ import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
 const Topbar = () => {
 
   const theme = useTheme();
-  const colors = colorCodes(theme.palette.mode);
   const colorMode = useContext(ColorModeContext);
 
   return (
@@ -38,17 +37,6 @@ const Topbar = () => {
           </IconButton>
         )}
 
-        <IconButton>
-            <NotificationsOutlinedIcon />
-        </IconButton>
-            
-        <IconButton>
-             <SettingsOutlinedIcon />
-        </IconButton>
-
-        <IconButton>
-            <PersonOutlinedIcon />
-        </IconButton>
 
       </Box>
 
