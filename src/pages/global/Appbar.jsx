@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useProSidebar , Sidebar, Menu, MenuItem, sidebarClasses } from 'react-pro-sidebar'
+import { ProSidebar,  Menu, MenuItem } from 'react-pro-sidebar'
 import { Box, Typography, useTheme } from '@mui/material'
 import { Link } from 'react-router-dom'
 import { colorCodes } from '../../theme'
@@ -43,7 +43,7 @@ const Appbar = () => {
   const theme = useTheme();
   const colors = colorCodes(theme.palette.mode);
   const [selected, setSelected] = useState('Dashboard');
-  const { collapseSidebar, collapsed } = useProSidebar();
+  const [isCollapsed, setIsCollapsed] = useState(false);
 
   return (
     <Box
@@ -51,44 +51,38 @@ const Appbar = () => {
         height: "100%",
         display: 'flex',
 
-        '& .ps-menu-button:hover': {
-          color: `${colors.orangeVibrant[500]} !important`,
-          backgroundColor: `${colors.primary[400]} !important`
+        "& .pro-sidebar-inner": {
+          background: `${colors.primary[400]} !important`,
+        },
+        "& .pro-icon-wrapper": {
+          backgroundColor: "transparent !important",
         },
 
-        '& .ps-menuitem-root.ps-active .ps-menu-button': {
-          backgroundColor: `${colors.primary[400]} !important`,
+        '& .pro-inner-item:hover': {
           color: `${colors.orangeVibrant[500]} !important`,
-        }
+        },
+
+        '& .pro-menu-item.active': {
+          color: `${colors.orangeVibrant[500]} !important`,
+        },
+        
       }}
     >
 
-    <Sidebar
-
-      rootStyles={{
-        [`.${sidebarClasses.container}`]: {
-          backgroundColor: `${colors.primary[400]}`,
-        },
-
-        [`.${sidebarClasses.root}`]: {
-          borderRight: `1px solid red`
-        },
-
-      }}
-
-      transitionDuration={500}
+    <ProSidebar
+      collapsed={isCollapsed}
     >
       <Menu>
         <MenuItem
-              onClick={() => collapseSidebar()}
-              icon={collapsed ? <img src={LogoOnly} alt='Logo-only' /> : undefined}
+              onClick={() => setIsCollapsed(!isCollapsed)}
+              icon={isCollapsed ? <img src={LogoOnly} alt='Logo-only' /> : undefined}
               style={{
-                margin: "40px 0 20px 0",
+                margin: "10px 0 20px 0",
                 color: colors.grey[100],
               }}
             >
               
-              {!collapsed && (
+              {!isCollapsed && (
               <Box
                 sx={{
                   display: 'flex',
@@ -110,7 +104,7 @@ const Appbar = () => {
         </MenuItem>
 
 
-        {!collapsed && (
+        {!isCollapsed && (
           <Box
             sx={{
               marginBottom: '25px',
@@ -143,7 +137,8 @@ const Appbar = () => {
               <Typography 
                 variant='h3' 
                 sx={{
-                  fontWeight: 'bold'
+                  fontWeight: 'bold',
+                  color: `${theme.palette.mode == 'dark' ? '#fff' : '#000'}`
                 }} 
               >
                 Anas
@@ -161,7 +156,7 @@ const Appbar = () => {
           </Box>
         )}
 
-        <Box>
+        <Box paddingLeft={isCollapsed ? undefined : "10%"}>
 
           <Item 
             title='Dashboard'
@@ -169,6 +164,7 @@ const Appbar = () => {
             icon = {<GridViewOutlinedIcon />}
             selected={selected}
             setSelected={setSelected}
+            
           />
 
           <Item 
@@ -205,7 +201,7 @@ const Appbar = () => {
         </Box>
       
       </Menu>
-    </Sidebar>
+    </ProSidebar>
 
     </Box>
   )

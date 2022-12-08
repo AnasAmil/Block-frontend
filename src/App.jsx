@@ -1,7 +1,6 @@
 import React from "react";
 import { ColorModeContext, useMode } from "./theme";
 import { CssBaseline, ThemeProvider } from "@mui/material";
-import { ProSidebarProvider } from "react-pro-sidebar";
 import Topbar from "./pages/global/Topbar";
 import Appbar from "./pages/global/Appbar";
 import Dashboard from "./pages/Dashboard";
@@ -21,9 +20,7 @@ const App = () => {
         <ThemeProvider theme={theme} >
           <CssBaseline />
           <div className="app">
-            <ProSidebarProvider>
               <Appbar />
-            </ProSidebarProvider>
             <main className="content">
               <Topbar />
               <Routes>
