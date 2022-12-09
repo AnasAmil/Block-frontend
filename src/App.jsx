@@ -5,7 +5,7 @@ import Topbar from "./pages/global/Topbar";
 import Appbar from "./pages/global/Appbar";
 import Dashboard from "./pages/Dashboard";
  import Warehouses from "./pages/Warehouses";
-// import Employees from "./pages/Employees";
+ import Employees from "./pages/Employees";
 // import Products from "./pages/Products";
 // import AddEmployee from "./pages/AddEmployee";
  import { Route, Routes } from "react-router-dom";
@@ -26,7 +26,8 @@ const App = () => {
               <Routes>
                 <Route path="/" element={<Dashboard/>} />
                 <Route path="/warehouses" element={<Warehouses/>} />
-                {/* <Route path="/employees" element={<Employees/>} />
+                <Route path="/employees" element={<Employees/>} />
+                {/* 
                 <Route path="/products" element={<Products/>} />
                 <Route path="/add_employee" element={<AddEmployee/>} /> */}
               </Routes>
