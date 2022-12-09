@@ -48,7 +48,7 @@ const Appbar = () => {
   return (
     <Box
       sx={{
-        height: "100%",
+        height: "100vh",
         display: 'flex',
 
         "& .pro-sidebar-inner": {
