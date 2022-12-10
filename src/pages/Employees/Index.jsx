@@ -30,7 +30,13 @@ const Employees = () => {
         {
             field: 'email',
             headerName: 'E-mail',
-            width: 300
+            width: 200
+        },
+
+        {
+            field: 'phone_number',
+            headerName: 'Phone number',
+            width: 150
         },
     
         {
