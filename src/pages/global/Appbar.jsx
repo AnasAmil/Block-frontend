@@ -107,7 +107,7 @@ const Appbar = () => {
         {!isCollapsed && (
           <Box
             sx={{
-              marginBottom: '25px',
+              marginBottom: '25px'
             }}
           >
             <Box

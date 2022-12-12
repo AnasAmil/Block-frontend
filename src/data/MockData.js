@@ -83,7 +83,7 @@ export const mockDataProduct = [
         quantity: 200,
         price: 15,
         mass: 300,
-        date: "04'-12-2022",
+        date: "04-12-2022",
         cell_occupation: 2
     }
 ]
