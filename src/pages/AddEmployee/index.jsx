@@ -1,6 +1,5 @@
 import React from "react";
 import { Box, Button, InputLabel, Select, useMediaQuery } from "@mui/material";
-import { colorCodes } from "../../theme";
 import MenuItem from "@mui/material/MenuItem";
 import { Formik } from "formik";
 import * as yup from "yup";
@@ -79,7 +78,7 @@ const AddEmployee = () => {
                 value={values.FirstName}
                 name="FirstName"
                 error={!!touched.FirstName && !!errors.FirstName}
-                helperText={touched.FirstName && errors.FirstName}
+                helpertext={touched.FirstName && errors.FirstName}
                 sx={{
                   gridColumn: "span 2",
                 }}
@@ -94,7 +93,7 @@ const AddEmployee = () => {
                 value={values.LastName}
                 name="LastName"
                 error={!!touched.LastName && !!errors.LastName}
-                helperText={touched.LastName && errors.LastName}
+                helpertext={touched.LastName && errors.LastName}
                 sx={{
                   gridColumn: "span 2",
                 }}
@@ -109,7 +108,7 @@ const AddEmployee = () => {
                 value={values.Username}
                 name="Username"
                 error={!!touched.Username && !!errors.Username}
-                helperText={touched.Username && errors.Username}
+                helpertext={touched.Username && errors.Username}
                 sx={{
                   gridColumn: "span 4",
                 }}
@@ -124,7 +123,7 @@ const AddEmployee = () => {
                 value={values.Email}
                 name="Email"
                 error={!!touched.Email && !!errors.Email}
-                helperText={touched.Email && errors.Email}
+                helpertext={touched.Email && errors.Email}
                 sx={{
                   gridColumn: "span 4",
                 }}
@@ -139,7 +138,7 @@ const AddEmployee = () => {
                 value={values.PhoneNumber}
                 name="PhoneNumber"
                 error={!!touched.PhoneNumber && !!errors.PhoneNumber}
-                helperText={touched.PhoneNumber && errors.PhoneNumber}
+                helpertext={touched.PhoneNumber && errors.PhoneNumber}
               />
 
               <CustomTextField
@@ -151,7 +150,7 @@ const AddEmployee = () => {
                 value={values.Address}
                 name="Address"
                 error={!!touched.Address && !!errors.Address}
-                helperText={touched.Address && errors.Address}
+                helpertext={touched.Address && errors.Address}
               />
 
               <CustomTextField 
@@ -163,7 +162,7 @@ const AddEmployee = () => {
                 value={values.Salary}
                 name="Salary"
                 error={!!touched.Salary && !!errors.Salary}
-                helperText={touched.Salary && errors.Salary}
+                helpertext={touched.Salary && errors.Salary}
               />
 
               <CustomSelectField>
@@ -175,7 +174,7 @@ const AddEmployee = () => {
                   value={values.Role}
                   name="Role"
                   error={!!touched.Role && !!errors.Role}
-                  helperText={touched.Role && errors.Role}
+                  helpertext={touched.Role && errors.Role}
                 >
                   <MenuItem value="Admin">Admin</MenuItem>
                   <MenuItem value="Employee">Employee</MenuItem>
@@ -191,7 +190,7 @@ const AddEmployee = () => {
                 value={values.Password}
                 name="Password"
                 error={!!touched.Password && !!errors.Password}
-                helperText={touched.Password && errors.Password}
+                helpertext={touched.Password && errors.Password}
                 sx={{
                   gridColumn: 'span 4'
                 }}

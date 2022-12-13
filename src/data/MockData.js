@@ -7,7 +7,17 @@ export const mockDataWarehouses = [
         location: "Street 34, N5, Bernoussi, Casablanca",
         phone_number: "+212 5 30 54 78 43",
         cells: 2000,
-
+        products: 
+            {
+                id: 1,
+                product_name: "coce",
+                quantity: 100,
+                price: 10,
+                mass: 250,
+                date: "05-12-2022",
+                cell_occupation: 1
+            },
+        
     },
 
     {
@@ -16,6 +26,18 @@ export const mockDataWarehouses = [
         location: "Street 179, N4, Ain sbaa, Casablanca",
         phone_number: "+212 5 22 56 83 99",
         cells: 5000,
+        products: [
+            {
+                id: 2,
+                product_name: "fanta",
+                quantity: 200,
+                price: 15,
+                mass: 300,
+                date: "04-12-2022",
+                cell_occupation: 2
+            }
+            
+        ]
 
     }
 ] 

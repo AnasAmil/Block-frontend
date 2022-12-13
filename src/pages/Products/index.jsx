@@ -1,19 +1,35 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Box, useTheme } from '@mui/system'
 import Header from '../../components/Header'
 import { colorCodes } from '../../theme'
-import { mockDataProduct } from '../../data/MockData'
 import { DataGrid } from '@mui/x-data-grid'
 import ActionCell from '../../components/ActionCell'
+import axios from 'axios'
 
 const Products = () => {
+
+    const [Products, setProducts] = useState([])
+
+    useEffect(() => {
+        axios.get('http://127.0.0.1:8001/apip/products', {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+        .then(res => {
+            setProducts(res.data['hydra:member'])
+        })
+        .catch(err => {
+            console.log(err);
+        })
+      }, [])
 
     const theme = useTheme()
     const colors = colorCodes(theme.palette.mode)
 
     const columns = [
         {
-            field: 'product_name',
+            field: 'productName',
             headerName: 'Product Name',
             width: 150
         },
@@ -25,38 +41,38 @@ const Products = () => {
         },
     
         {
-            field: 'price',
+            field: 'priceUnit',
             headerName: 'Price/U',
-            width: 200
+            width: 80
         },
 
         {
             field: 'mass',
             headerName: 'Mass/U',
-            width: 150
+            width: 100
         },
     
         {
-            field: 'date',
+            field: 'dateCreation',
             headerName: 'Date',
-            width: 150
+            width: 250
         },
 
         {
-            field: 'cell_occupation',
+            field: 'cellOccupation',
             headerName: 'Cell',
-            width: 150
+            width: 50
         },
     
         {
             field: 'action',
             headerName: '',
             width: 100,
-            renderCell: () => <ActionCell />
+            renderCell: ({ row: {id} }) => <ActionCell id={id} />
         },
     ]
 
-    const rows = mockDataProduct;
+    const rows = Products;
 
   return (
     <>

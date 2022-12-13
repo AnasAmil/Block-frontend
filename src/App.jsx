@@ -4,11 +4,15 @@ import { CssBaseline, ThemeProvider } from "@mui/material";
 import Topbar from "./pages/global/Topbar";
 import Appbar from "./pages/global/Appbar";
 import Dashboard from "./pages/Dashboard";
- import Warehouses from "./pages/Warehouses";
- import Employees from "./pages/Employees";
- import AddEmployee from "./pages/AddEmployee";
- import Products from "./pages/Products";
- import { Route, Routes } from "react-router-dom";
+import Warehouses from "./pages/Warehouses";
+import Warehouse from "./pages/Warehouse"
+import Employees from "./pages/Employees";
+import AddEmployee from "./pages/AddEmployee";
+import Products from "./pages/Products";
+import AddWarehouse from "./pages/AddWarehouse"
+import UpdateWarehouse from "./pages/UpdateWarehouse";
+import AddProduct from "./pages/AddProduct";
+import { Route, Routes } from "react-router-dom";
 
 
 const App = () => {
@@ -26,8 +30,12 @@ const App = () => {
               <Routes>
                 <Route path="/" element={<Dashboard/>} />
                 <Route path="/warehouses" element={<Warehouses/>} />
+                <Route path="/warehouses/:id" element={<Warehouse/>} />
+                <Route path="/warehouses/:id/update" element={<UpdateWarehouse />} />
+                <Route path="/add_warehouse" element={<AddWarehouse/>} />
                 <Route path="/employees" element={<Employees/>} />
                 <Route path="/products" element={<Products/>} />
+                <Route path="/warehouses/:id/add_product" element={<AddProduct/>} />
                 <Route path="/add_employee" element={<AddEmployee/>} />
               </Routes>
             </main>
