@@ -38,7 +38,7 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
 
 }
 
-const Appbar = () => {
+const Appbar = ({ userConnected }) => {
 
   const theme = useTheme();
   const colors = colorCodes(theme.palette.mode);
@@ -141,7 +141,7 @@ const Appbar = () => {
                   color: `${theme.palette.mode == 'dark' ? '#fff' : '#000'}`
                 }} 
               >
-                Anas
+                {userConnected.email}
               </Typography>
               <Typography
                 variant='h6'

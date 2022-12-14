@@ -34,9 +34,16 @@ const Warehouse = () => {
 
     const columns = [
         {
-            field: '',
+            field: 'products',
             headerName: 'Product Name',
             width: 150,
+            renderCell: ({ row: products }) => (
+                <Box>
+                    {products.map((product) => (
+                        <h1>{product}</h1>
+                    ))}
+                </Box>
+            )
         },
     ]
 
@@ -45,9 +52,6 @@ const Warehouse = () => {
     const  DeleteWarehouse =  () => {
         axios.delete(`http://127.0.0.1:8001/apip/warehouses/${id}`)
             .then(() => navigate('/warehouses'))
-
-        
-            
     }
 
   return (

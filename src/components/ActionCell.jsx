@@ -1,11 +1,5 @@
 import React, { useState } from "react";
 import {
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
   IconButton,
   Stack,
   useTheme,
@@ -14,11 +8,14 @@ import { colorCodes } from "../theme";
 import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import axios from "axios";
+import DeleteDialaog from "./DeleteDialaog";
+import EditModal from "./EditModal";
 
 const ActionCell = ({ id }) => {
   const theme = useTheme();
   const colors = colorCodes(theme.palette.mode);
   const [open, setOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false)
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -35,30 +32,23 @@ const ActionCell = ({ id }) => {
     
   };
 
+  const handleModal = () => {
+    setModalOpen(!modalOpen)
+  }
+
+
   return (
     <Stack direction="row" spacing={1}>
-      <IconButton>
+
+      <IconButton onClick={handleModal}>
         <ModeEditOutlineOutlinedIcon sx={{ color: colors.greenVibrant[500] }} />
       </IconButton>
+      <EditModal open={modalOpen} modalHandler={handleModal} id={id}/>
 
       <IconButton onClick={handleClickOpen}>
         <DeleteOutlineOutlinedIcon sx={{ color: colors.redVibrant[500] }} />
       </IconButton>
-
-      <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Are you sure you want to delete this product ?</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            Keep in mind that by deleting this Product you can't get it back !
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}  color='secondary' sx={{ fontWeight: 'bold' }}>Cancel</Button>
-          <Button onClick={deleteProduct} autoFocus variant='contained' color='error' sx={{ fontWeight: 'bold' }}>
-            Delete
-          </Button>
-        </DialogActions>
-      </Dialog>
+      <DeleteDialaog open={open} closeDialog={handleClose} deleteProduct={deleteProduct} />
     </Stack>
   );
 };

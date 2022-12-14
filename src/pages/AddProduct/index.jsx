@@ -1,35 +1,47 @@
 import { Box, Button, useMediaQuery } from "@mui/material";
 import { Formik } from "formik";
 import Header from "../../components/Header";
-import React from "react";
+import React, { useState } from "react";
 import * as yup from "yup";
 import { CustomTextField } from "../../components/CustomTextField";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
 
 const AddProduct = () => {
   const isNonMobile = useMediaQuery("(min-width: 600px)");
-  const handleFormSubmit = (values) => {
-    console.log(values);
-  };
 
   const { id } = useParams();
 
+  const [product, setProduct] = useState({})
+  const navigate = useNavigate()
+  const handleFormSubmit = (values) => {
+    axios.post('http://127.0.0.1:8001/apip/products', values)
+      .then(res => {
+        setProduct(res.data),
+        navigate('/warehouses')
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  };
+
+  console.log(product);
+
   const initialValues = {
-    ProductName: "",
-    warehouse_id: id,
-    Quantity: "",
-    Price: "",
-    Mass: "",
-    Date: "",
-    CellOccupation: "",
+    productName: "",
+    warehouse: `/apip/warehouses/${id}`,
+    quantity: "",
+    priceUnit: "",
+    mass: "",
+    cellOccupation: "",
   };
 
   const productSchema = yup.object().shape({
-    ProductName: yup.string().required("Please fill the field"),
-    Quantity: yup.string().required("Please fill the field"),
-    Price: yup.number().required("Please fill the field"),
-    Mass: yup.number().required("Please fill the field"),
-    CellOccupation: yup.number().required("Please fill the field"),
+    productName: yup.string().required("Please fill the field"),
+    quantity: yup.number().required("Please fill the field"),
+    priceUnit: yup.number().required("Please fill the field"),
+    mass: yup.number().required("Please fill the field"),
+    cellOccupation: yup.number().required("Please fill the field"),
   });
 
   return (
@@ -66,10 +78,10 @@ const AddProduct = () => {
                 variant="outlined"
                 type="text"
                 disabled
-                value={values.warehouse_id}
-                name="warehouse_id"
-                error={!!touched.warehouse_id && !!errors.warehouse_id}
-                helperText={touched.warehouse_id && errors.warehouse_id}
+                value={values.warehouse}
+                name="warehouse"
+                error={!!touched.warehouse && !!errors.warehouse}
+                helperText={touched.warehouse && errors.warehouse}
                 sx={{
                   gridColumn: "span 4",
                 }}
@@ -81,10 +93,10 @@ const AddProduct = () => {
                 type="text"
                 onBlur={handleBlur}
                 onChange={handleChange}
-                value={values.ProductName}
-                name="ProductName"
-                error={!!touched.ProductName && !!errors.ProductName}
-                helperText={touched.ProductName && errors.ProductName}
+                value={values.productName}
+                name="productName"
+                error={!!touched.productName && !!errors.productName}
+                helperText={touched.productName && errors.productName}
                 sx={{
                   gridColumn: "span 2",
                 }}
@@ -96,10 +108,10 @@ const AddProduct = () => {
                 type="number"
                 onBlur={handleBlur}
                 onChange={handleChange}
-                value={values.Quantity}
-                name="Quantity"
-                error={!!touched.Quantity && !!errors.Quantity}
-                helperText={touched.Quantity && errors.Quantity}
+                value={values.quantity}
+                name="quantity"
+                error={!!touched.quantity && !!errors.quantity}
+                helperText={touched.quantity && errors.quantity}
                 sx={{
                   gridColumn: "span 2",
                 }}
@@ -108,13 +120,13 @@ const AddProduct = () => {
               <CustomTextField
                 label="Price"
                 variant="outlined"
-                type="text"
+                type="number"
                 onBlur={handleBlur}
                 onChange={handleChange}
-                value={values.Price}
-                name="Price"
-                error={!!touched.Price && !!errors.Price}
-                helperText={touched.Price && errors.Price}
+                value={values.priceUnit}
+                name="priceUnit"
+                error={!!touched.priceUnit && !!errors.priceUnit}
+                helperText={touched.priceUnit && errors.priceUnit}
                 sx={{
                   gridColumn: "span 2",
                 }}
@@ -126,10 +138,10 @@ const AddProduct = () => {
                 type="number"
                 onBlur={handleBlur}
                 onChange={handleChange}
-                value={values.Mass}
-                name="Mass"
-                error={!!touched.Mass && !!errors.Mass}
-                helperText={touched.Mass && errors.Mass}
+                value={values.mass}
+                name="mass"
+                error={!!touched.mass && !!errors.mass}
+                helperText={touched.mass && errors.mass}
                 sx={{
                   gridColumn: "span 2",
                 }}
@@ -141,10 +153,10 @@ const AddProduct = () => {
                 type="number"
                 onBlur={handleBlur}
                 onChange={handleChange}
-                value={values.CellOccupation}
-                name="CellOccupation"
-                error={!!touched.CellOccupation && !!errors.CellOccupation}
-                helperText={touched.CellOccupation && errors.CellOccupation}
+                value={values.cellOccupation}
+                name="cellOccupation"
+                error={!!touched.cellOccupation && !!errors.cellOccupation}
+                helperText={touched.cellOccupation && errors.cellOccupation}
                 sx={{
                   gridColumn: "span 4",
                 }}
