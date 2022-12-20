@@ -41,7 +41,8 @@ const Authentication = ({ setIsloggedin, setUserConnected }) => {
       });
   }, []);
 
-
+  console.log(users);
+ 
   const handleFormSubmit = (values) => {
     users.map((user) => {
       if(values.email == user.email && values.password == user.password){

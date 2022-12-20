@@ -5,6 +5,7 @@ import {
   InputBase,
   Icon,
   Menu,
+  Button,
 } from "@mui/material";
 import { useContext, useState } from "react";
 import { ColorModeContext, colorCodes } from "../../theme";
@@ -12,12 +13,15 @@ import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import { MenuItem } from "react-pro-sidebar";
+import { useNavigate, Link, useLocation } from "react-router-dom";
 
-const Topbar = ({ isloggedin, setIsloggedin }) => {
+const Topbar = ({ isloggedin, setIsloggedin, userConnected }) => {
   const theme = useTheme();
   const colorMode = useContext(ColorModeContext);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
+  const navigate = useNavigate();
+  const pathname = useLocation()
 
   const handleMenu = (e) => {
     setAnchorEl(e.currentTarget);
@@ -25,6 +29,11 @@ const Topbar = ({ isloggedin, setIsloggedin }) => {
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const Logout = () => {
+    navigate("/");
+    setIsloggedin(false);
   };
 
   return (
@@ -61,8 +70,35 @@ const Topbar = ({ isloggedin, setIsloggedin }) => {
               <PersonOutlinedIcon />
             </IconButton>
             <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
-              <MenuItem onClick={handleClose}>Profile</MenuItem>
-              <MenuItem onClick={() => setIsloggedin(false)}>Logout</MenuItem>
+              <MenuItem>
+                <Button
+                  component={Link}
+                  variant="text"
+                  sx={{
+                    color: `${
+                      theme.palette.mode == "dark" ? "white" : "black"
+                    }`,
+                    fontWeight: "bold",
+                  }}
+                  to={`/profile/${userConnected.id}`}
+                >
+                  Profile
+                </Button>
+              </MenuItem>
+              <MenuItem>
+                  <Button
+                    onClick={Logout}
+                    variant="text"
+                    sx={{
+                      color: `${
+                        theme.palette.mode == "dark" ? "white" : "black"
+                      }`,
+                      fontWeight: "bold",
+                    }}
+                  >
+                    Logout
+                  </Button>
+              </MenuItem>
             </Menu>
           </>
         )}

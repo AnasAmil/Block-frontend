@@ -1,28 +1,44 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { colorCodes } from '../../theme'
 import { Box, useTheme } from '@mui/material'
 import { DataGrid } from '@mui/x-data-grid'
 import Header from '../../components/Header'
-import { mockDataTeam } from '../../data/MockData'
 import ActionCell from '../../components/ActionCell'
 import RoleCell from '../../components/RoleCell'
+import axios from 'axios'
 
 
 
 const Employees = () => {
+
+    const [users, setUsers] = useState({});
+    useEffect(() => {
+        axios
+          .get("http://127.0.0.1:8001/apip/users", {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+          .then((res) => {
+            setUsers(res.data["hydra:member"]);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }, []);
 
     const theme = useTheme()
     const colors = colorCodes(theme.palette.mode)
 
     const columns = [
         {
-            field: 'first_name',
+            field: 'firstName',
             headerName: 'First Name',
             width: 150
         },
     
         {
-            field: 'last_name',
+            field: 'lastName',
             headerName: 'Last Name',
             width: 150
         },
@@ -34,7 +50,7 @@ const Employees = () => {
         },
 
         {
-            field: 'phone_number',
+            field: 'phoneNumber',
             headerName: 'Phone number',
             width: 150
         },
@@ -54,7 +70,7 @@ const Employees = () => {
         },
     ]
 
-    const rows = mockDataTeam;
+    const rows = users;
 
   return (
     <>
