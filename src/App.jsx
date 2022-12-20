@@ -13,6 +13,7 @@ import AddWarehouse from "./pages/AddWarehouse";
 import UpdateWarehouse from "./pages/UpdateWarehouse";
 import AddProduct from "./pages/AddProduct";
 import Authentication from "./pages/Authentication";
+import Profile from "./pages/Profile";
 import { Route, Routes } from "react-router-dom";
 
 const App = () => {
@@ -29,16 +30,21 @@ const App = () => {
           <div className="app">
             <Appbar userConnected={userConnected} />
             <main className="content">
-              <Topbar isloggedin={isloggedin} setIsloggedin={setIsloggedin} />
+              <Topbar isloggedin={isloggedin} setIsloggedin={setIsloggedin} userConnected={userConnected} />
               <Routes>
-                <Route path="/" element={<Dashboard />} />
-                <Route path="/warehouses" element={<Warehouses />} />
-                <Route path="/warehouses/:id" element={<Warehouse />} />
+                {userConnected.role == 'Admin' ? (
+                  <Route path="/" element={<Dashboard />} />
+                ) : (
+                  <Route path="/warehouses" element={<Warehouses userConnected={userConnected} />} />
+                )}
+                <Route path="/profile/:id" element={<Profile userConnected={userConnected} />} />
+                <Route path="/warehouses" element={<Warehouses userConnected={userConnected} />} />
+                <Route path="/warehouses/:id" element={<Warehouse userConnected={userConnected} />} />
                 <Route
                   path="/warehouses/:id/update"
                   element={<UpdateWarehouse />}
                 />
-                <Route path="/add_warehouse" element={<AddWarehouse />} />
+                <Route path="/add_warehouse" element={<AddWarehouse userConnected={userConnected} />} />
                 <Route path="/employees" element={<Employees />} />
                 <Route path="/products" element={<Products />} />
                 <Route

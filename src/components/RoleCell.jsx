@@ -18,15 +18,15 @@ const RoleCell = ({ role }) => {
         display: 'flex',
         justifyContent: 'space-around',
         borderRadius: '20px',
-        border: `1px solid ${ role == 'admin' ? colors.greenVibrant[500] : colors.redVibrant[500] }`,
+        border: `1px solid ${ role == 'Admin' ? colors.greenVibrant[500] : colors.redVibrant[500] }`,
     }}
 
-    backgroundColor={role == 'admin' ? colors.greenVibrant[900] : colors.redVibrant[900]}
+    backgroundColor={role == 'Admin' ? colors.greenVibrant[900] : colors.redVibrant[900]}
 >
 
-    { role == 'admin' ? <AdminPanelSettingsOutlinedIcon sx={{ color: colors.greenVibrant[500] }} /> : <BadgeOutlinedIcon sx={{ color: colors.redVibrant[500] }} />}
+    { role == 'Admin' ? <AdminPanelSettingsOutlinedIcon sx={{ color: colors.greenVibrant[500] }} /> : <BadgeOutlinedIcon sx={{ color: colors.redVibrant[500] }} />}
     
-    <Typography color={ role == 'admin' ? colors.greenVibrant[500] : colors.redVibrant[500] }>
+    <Typography color={ role == 'Admin' ? colors.greenVibrant[500] : colors.redVibrant[500] }>
         {role}
     </Typography>
 
